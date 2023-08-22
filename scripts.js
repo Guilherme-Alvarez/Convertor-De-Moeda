@@ -1,14 +1,17 @@
 const button = document.getElementById('convert-button')
 const select = document.getElementById('currency-input')
 
-const dolar = 4.9
-const euro = 5.49
-const bitcoin = 146.143
 
-const convertValues = () => {
+
+const convertValues = async () => {
     const inputReais = document.getElementById('input-real').value
     const realValueText = document.getElementById('currency-real-value')
     const currencyAll = document.getElementById('currency-all')
+
+    const data = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL').then(response => response.json())
+    const euro = data.EURBRL.high
+    const dolar = data.USDBRL.high
+    const bitcoin = data.BTCBRL.high
 
 
 
@@ -40,21 +43,21 @@ const convertValues = () => {
 
 }
 
-const changeCurrency = () =>{
+const changeCurrency = () => {
     const currencyName = document.getElementById('currency-name')
     const currencyImg = document.getElementById('currency-img')
 
-    if(select.value === 'US$ Dólar Americano'){
+    if (select.value === 'US$ Dólar Americano') {
         currencyName.innerHTML = 'US$ Dólar Americano'
         currencyImg.src = './assets/estados-unidos (1) 1.png'
     }
 
-    if(select.value === '€ Euro'){
+    if (select.value === '€ Euro') {
         currencyName.innerHTML = '€ Euro'
         currencyImg.src = './assets/Design sem nome 1.png'
     }
 
-    if(select.value === 'Bitcoin'){
+    if (select.value === 'Bitcoin') {
         currencyName.innerHTML = 'Bitcoin'
         currencyImg.src = './assets/Design sem nome (1) 1.png '
     }
